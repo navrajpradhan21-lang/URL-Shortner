@@ -1,2 +1,6 @@
 docker exec -it url-shortener-redis redis-cli // to get redis in terminal
 // (Invoke-RestMethod https://api.ipify.org) to get the ip 
+
+docker compose down to stop an container
+
+docker compose up --build -d 
