@@ -6,15 +6,19 @@ const MAX_REQUESTS = 5;
 export const rateLimiter = async(req,res,next)=>{
     try{
         const ip = req.ip;
-        const key = `rate-limit:${ip}`;
+        const key = `rate-limit:${ip}`
+        console.log("CLIENT IP:", ip);
+        console.log("REDIS KEY:", key);
 
         //1. Increament request counter
         const requests = await redis.incr(key);
+        console.log("REQUEST COUNT:", requests);
 
         //2.Set expiration for first request
         if(requests === 1){
             await redis.expire(key, WINDOW_SECONDS)
         }
+        console.log("REDIS TTL:", await redis.ttl(key));
         //3. Get remaining time 
         const ttl = await redis.ttl(key);
 
