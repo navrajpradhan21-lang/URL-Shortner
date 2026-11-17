@@ -4,3 +4,39 @@ docker exec -it url-shortener-redis redis-cli // to get redis in terminal
 docker compose down to stop an container
 
 docker compose up --build -d 
+__________________________________________ NGINX__________________________________________
+
+// Understand the Nginx configuration
+UPSTREAM
+upstream defines our backend server group.
+
+least_conn sends requests to the server with the fewest active connections.
+
+Other load-balancing algorithms include:
+
+Algorithm	How it works
+Round Robin :	Distributes requests sequentially
+Least Connections: Selects server with fewest active connections
+IP Hash :	Selects a server based on client IP
+Weighted Round Robin :	Distributes according to server weights
+
+-------------------------------------------------------------------------------------------------
+Milestone 7 — Production readiness and graceful shutdown
+We'll improve how your URL shortener behaves when containers restart, connections fail, or the server receives a shutdown signal.
+
+What we'll implement-
+
+Graceful shutdown: Handle SIGTERM and SIGINT so the server stops accepting new requests and closes existing connections.
+
+Health checks Add /health and /ready endpoints to distinguish whether the process is alive and whether its dependencies are available.
+
+Docker health checks Configure Compose to monitor backend health.
+
+Nginx failover Verify that requests continue reaching the remaining backend when one instance stops.
+ 
+Connection cleanup Properly close MongoDB and Redis connections.
+Graceful shutdown lets your application:
+- Stop accepting new connections.
+- Finish existing requests where possible.
+- Close MongoDB and Redis connections.
+- Exit cleanly.
