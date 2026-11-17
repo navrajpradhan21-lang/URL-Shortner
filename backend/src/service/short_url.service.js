@@ -134,7 +134,7 @@ export const getShortUrlAndIncrement = async (id) => {
         if (!url) {
             return null;
         }
-        6.// Save URL in Redis
+        // 6. Save URL in Redis
         await cacheUrl(id, {
             full_url: url.full_url,
             expiresAt: url.expiresAt
