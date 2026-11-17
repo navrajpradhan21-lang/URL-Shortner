@@ -1,7 +1,7 @@
 import redis from '../config/redis.js';
 
 const WINDOW_SECONDS = 60;
-const MAX_REQUESTS = 5;
+const MAX_REQUESTS = 100;
 
 export const rateLimiter = async(req,res,next)=>{
     try{

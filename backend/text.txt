@@ -40,3 +40,15 @@ Graceful shutdown lets your application:
 - Finish existing requests where possible.
 - Close MongoDB and Redis connections.
 - Exit cleanly.
+------------------------------------------------------------------------
+We also created health and /ready endpoint; step 2 
+
+Milestone 7 — Step 3: Docker Compose health checks
+
+Now that your /health and /ready endpoints work, we'll configure Docker to monitor the health of your application and its dependencies.
+
+Our goal is:
+- MongoDB: check whether the database responds.
+- Redis: check whether Redis responds to commands.
+- Backend 1 and 2: check whether their readiness endpoints return HTTP 200.
+- Nginx: check whether it can serve requests.
